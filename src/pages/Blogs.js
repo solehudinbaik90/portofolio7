@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import BlogsView from "../components/BlogsView";
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
