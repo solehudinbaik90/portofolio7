@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
 function Particle({ lightMode }) {
   const [init, setInit] = useState(false);
+  const startedRef = useRef(false);
 
   useEffect(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => setInit(true));
+    })
+      .then(() => setInit(true))
+      .catch((err) => {
+        console.error("Gagal inisialisasi tsParticles engine:", err);
+        setInit(false);
+      });
   }, []);
 
   if (!init) return null;
@@ -45,7 +54,9 @@ function Particle({ lightMode }) {
     detectRetina: true,
   };
 
-  return <Particles id="tsparticles" className="mi-home-particle" options={options} />;
+  return (
+    <Particles id="tsparticles" className="mi-home-particle" options={options} />
+  );
 }
 
 export default Particle;
