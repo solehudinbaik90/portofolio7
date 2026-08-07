@@ -1,32 +1,84 @@
-import React, { useEffect, useState } from "react";
-import * as Icon from "react-helmet-async";
+import React, { useState } from "react";
+import * as Icon from "react-feather";
 import "./App.scss";
+import About from "./pages/About";
+import BlogDetails from "./pages/BlogDetails";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Notfound from "./pages/Notfound";
+import Portfolios from "./pages/Portfolios";
+import Resumes from "./pages/Resumes";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./router";
-import { LightModeContext } from "./context/LightModeContext";
+import { createBrowserRouter } from "react-router-dom";
 
 function App() {
-  const [lightMode, setLightMode] = useState(false);
+  const [lightMode, setLightMode] = useState(false); // Made it true if you want to load your site light mode primary
 
-  useEffect(() => {
-    document.body.classList.toggle("light", lightMode);
-  }, [lightMode]);
+  lightMode
+    ? document.body.classList.add("light")
+    : document.body.classList.remove("light");
+
+  const handleMode = () => {
+    if (!lightMode) {
+      setLightMode(true);
+      document.body.classList.add("light");
+    } else {
+      setLightMode(false);
+      document.body.classList.remove("light");
+    }
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home lightMode={lightMode} />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/resume",
+      element: <Resumes />,
+    },
+    {
+      path: "/portfolios",
+      element: <Portfolios />,
+    },
+    {
+      path: "/blogs",
+      element: <Blogs />,
+    },
+    {
+      path: "/blogs/:id/:title",
+      element: <BlogDetails />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "*",
+      element: <Notfound />,
+    },
+  ]);
 
   return (
-    <LightModeContext.Provider value={lightMode}>
+    <>
       <div className="light-mode">
         <span className="icon">
           <Icon.Sun />
         </span>
         <button
-          type="button"
-          aria-label="Ganti mode terang/gelap"
-          className={lightMode ? "light-mode-switch active" : "light-mode-switch"}
-          onClick={() => setLightMode((v) => !v)}
-        />
+          className={
+            lightMode ? "light-mode-switch active" : "light-mode-switch"
+          }
+          onClick={() => handleMode()}
+        ></button>
       </div>
       <RouterProvider router={router} />
-    </LightModeContext.Provider>
+    </>
   );
 }
 
