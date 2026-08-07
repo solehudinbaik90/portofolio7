@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async"; // Sudah dimigrasi ke async
 import TrackVisibility from "react-on-screen";
 import Layout from "../components/Layout";
 import Progress from "../components/Progress";
@@ -15,26 +15,28 @@ function Resumes() {
   const [educationExperience, setEducationExperience] = useState([]);
 
   useEffect(() => {
-  let mounted = true;
-  axios.get("/api/skills")
-    .then((response) => {
-      mounted && setSkills(response.data);
-    })
-    .catch((error) => console.error("Gagal memuat skills:", error));
+    let mounted = true;
+    
+    axios.get("/api/skills")
+      .then((response) => {
+        if (mounted) setSkills(response.data);
+      })
+      .catch((error) => console.error("Gagal memuat skills:", error));
 
-  axios.get("/api/experience")
-    .then((response) => {
-      mounted && {
-        setWorkingExperience(response.data.workingExperience);
-        setEducationExperience(response.data.educationExperience);
-      };
-    })
-    .catch((error) => console.error("Gagal memuat experience:", error));
+    axios.get("/api/experience")
+      .then((response) => {
+        // PERBAIKAN: Menggunakan blok percabangan if yang valid untuk mengeksekusi multi-state
+        if (mounted) {
+          setWorkingExperience(response.data.workingExperience);
+          setEducationExperience(response.data.educationExperience);
+        }
+      })
+      .catch((error) => console.error("Gagal memuat experience:", error));
 
-  return () => {
-    mounted = false;
-  };
-}, []);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <Layout>
