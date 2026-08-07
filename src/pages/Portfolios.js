@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async"; // Sudah dimigrasi ke async
 import Layout from "../components/Layout";
 import Pagination from "../components/Pagination";
 import PortfoliosView from "../components/PortfoliosView";
@@ -8,23 +8,24 @@ import Sectiontitle from "../components/Sectiontitle";
 import Spinner from "../components/Spinner";
 
 function Portfolios() {
-  const [portfolios, setPortfoios] = useState([]);
+  // PERBAIKAN: Huruf 'l' sudah ditambahkan pada setPortfolios
+  const [portfolios, setPortfolios] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [portfoliosPerPage] = useState(9);
 
   useEffect(() => {
-  let mounted = true;
-  axios.get("/api/portfolios")
-    .then((response) => {
-      mounted && setPortfolios(response.data);
-    })
-    .catch((error) => {
-      console.error("Gagal memuat portfolios:", error);
-    });
-  return () => {
-    mounted = false;
-  };
-}, []);
+    let mounted = true;
+    axios.get("/api/portfolios")
+      .then((response) => {
+        mounted && setPortfolios(response.data);
+      })
+      .catch((error) => {
+        console.error("Gagal memuat portfolios:", error);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const indexOfLastPortfolios = currentPage * portfoliosPerPage;
   const indexOfFirstPortfolios = indexOfLastPortfolios - portfoliosPerPage;
