@@ -8,90 +8,44 @@ function Particle({ lightMode }) {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    }).then(() => setInit(true));
   }, []);
 
-  const paramConfig = {
+  if (!init) return null;
+
+  const baseColor = lightMode ? "#000000" : "#ffffff";
+
+  const options = {
+    fpsLimit: 60,
     particles: {
-      number: {
-        value: 160,
-        density: {
-          enable: false,
-        },
-      },
-      color: {
-        value: "#ffffff",
-      },
-      opacity: {
-        value: 0.1,
-      },
-      size: {
-        value: 5,
-        random: true,
-        anim: {
-          speed: 4,
-          size_min: 1,
-        },
-      },
-      line_linked: {
-        enable: false,
-      },
+      number: { value: 120, density: { enable: true, area: 800 } },
+      color: { value: baseColor },
+      opacity: { value: 0.15 },
+      size: { value: { min: 1, max: 5 } },
+      links: { enable: true, color: baseColor, distance: 140, opacity: 0.1 },
+      collisions: { enable: true },
       move: {
         enable: true,
         random: true,
         speed: 1,
         direction: "top",
-        out_mode: "out",
+        outModes: { default: "out" },
       },
     },
-  };
-
-  const paramConfigLight = {
-    particles: {
-      number: {
-        value: 160,
-        density: {
-          enable: false,
-        },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        onClick: { enable: true, mode: "attract" },
       },
-      color: {
-        value: "#000000",
-      },
-      opacity: {
-        value: 0.1,
-      },
-      size: {
-        value: 5,
-        random: true,
-        anim: {
-          speed: 4,
-          size_min: 0.3,
-        },
-      },
-      line_linked: {
-        enable: false,
-      },
-      move: {
-        enable: true,
-        random: true,
-        speed: 1,
-        direction: "top",
-        out_mode: "out",
+      modes: {
+        repulse: { distance: 100, duration: 0.4 },
+        attract: { distance: 150, duration: 0.4, factor: 3 },
       },
     },
+    detectRetina: true,
   };
 
-  return (
-    init && (
-      <Particles
-        id="tsparticles"
-        className="mi-home-particle"
-        options={lightMode ? paramConfigLight : paramConfig}
-      />
-    )
-  );
+  return <Particles id="tsparticles" className="mi-home-particle" options={options} />;
 }
 
 export default Particle;
