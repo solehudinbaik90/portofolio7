@@ -5,8 +5,10 @@ import Layout from "../components/Layout";
 import Particle from "../components/Particle";
 import Socialicons from "../components/Socialicons";
 import Spinner from "../components/Spinner";
+import { useLightMode } from "../context/LightModeContext";
 
-function Home({ lightMode }) {
+function Home() {
+  const lightMode = useLightMode();
   const [information, setInformation] = useState("");
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function Home({ lightMode }) {
               <div className="col-lg-10 col-12">
                 <div className="mi-home-content">
                   <h1>
-                    Hi, I am{" "}
+                    Hi, Saya{" "}
                     <span className="color-theme">{information.name}</span>
                   </h1>
                   <p>{information.aboutContent}</p>
