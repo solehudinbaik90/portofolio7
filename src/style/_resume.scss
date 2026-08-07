@@ -1,0 +1,61 @@
+.mi-resume-wrapper {
+  position: relative;
+  padding-left: 200px;
+  border-left: 1px solid $color-border;
+
+  @media #{$layout-mobile-lg} {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+.mi-resume {
+  position: relative;
+
+  &:not(:last-child) { margin-bottom: 30px; }
+
+  &-summary {
+    position: absolute;
+    left: -200px;
+    top: 0;
+    width: 170px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: 4px;
+      height: 11px;
+      width: 11px;
+      border-radius: 50%;
+      background: $color-bg-body;
+      border: 2px solid $color-theme;
+    }
+  }
+
+  &-year { margin-bottom: 0; color: $color-body; }
+
+  &-details h5 { color: $color-theme; margin-bottom: 5px; }
+
+  &-company { color: $color-heading; margin-bottom: 10px; }
+
+  @media #{$layout-mobile-lg} {
+    &-summary {
+      position: static;
+      width: auto;
+      margin-bottom: 5px;
+      &::before { display: none; }
+    }
+  }
+}
+
+.light {
+  .mi-resume-wrapper { border-color: $light-color-border; }
+
+  .mi-resume {
+    &-summary::before { background: $light-color-bg-body; border-color: $light-color-border; }
+    &-year { color: $light-color-body; }
+    &-company { color: $light-color-heading; }
+    &-details h5 { color: $light-color-theme; }
+  }
+}

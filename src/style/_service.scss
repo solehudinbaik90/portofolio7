@@ -1,0 +1,81 @@
+.mi-service {
+  height: 100%;
+  padding: 40px 30px;
+  text-align: center;
+  border: 1px solid $color-border;
+  border-top: 3px solid transparent;
+  background: lighten($color-bg-body, 5);
+  transition: $transition;
+
+  &-icon {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 40px;
+    color: $color-theme;
+  }
+
+  h5 {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 1px;
+      background: $color-border;
+    }
+  }
+
+  p { margin-bottom: 0; }
+
+  &:hover { border-top-color: $color-theme; }
+}
+
+.mi-progress {
+  &-title { margin-bottom: 5px; }
+
+  &-inner { display: flex; align-items: center; }
+
+  &-percentage {
+    flex: 0 0 50px;
+    font-weight: 600;
+    color: $color-theme;
+  }
+
+  &-container {
+    flex: 1;
+    height: 6px;
+    border-radius: 100px;
+    background: $color-border;
+    overflow: hidden;
+  }
+
+  &-active {
+    display: block;
+    height: 100%;
+    border-radius: 100px;
+    background: $color-theme;
+    transition: width 1s ease-out;
+  }
+}
+
+.light {
+  .mi-service {
+    border-color: $light-color-border;
+    background: darken($light-color-bg-body, 5);
+
+    &-icon { color: $light-color-theme; }
+    h5::before { background: $light-color-border; }
+    &:hover { border-top-color: $light-color-theme; }
+  }
+
+  .mi-progress {
+    &-container { background: $light-color-border; }
+    &-active { background: $light-color-theme; }
+  }
+}

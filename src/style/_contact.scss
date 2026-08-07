@@ -1,0 +1,68 @@
+.mi-contact {
+  &-info { margin-top: -30px; }
+
+  &-infoblock {
+    margin-top: 30px;
+    padding: 30px;
+    display: flex;
+    background: rgba(lighten($color-bg-body, 5), 1);
+
+    &-icon {
+      display: inline-block;
+      height: 70px;
+      width: 70px;
+      flex: 0 0 70px;
+      border: 1px solid $color-border;
+      text-align: center;
+      line-height: 66px;
+      margin-right: 20px;
+
+      svg { height: 30px; width: 30px; }
+    }
+
+    &-content {
+      h6 { margin-top: -5px; }
+
+      p {
+        margin-bottom: 0;
+
+        a {
+          color: $color-body;
+          transition: $transition;
+          &:hover { color: $color-theme; }
+        }
+      }
+    }
+  }
+
+  @media #{$layout-tablet}, #{$layout-mobile-lg} {
+    &-info { margin-top: 50px; }
+  }
+
+  @media #{$layout-mobile-sm} {
+    &-infoblock {
+      padding: 20px;
+      flex-wrap: wrap;
+
+      &-icon {
+        height: 55px;
+        width: 55px;
+        flex: 0 0 55px;
+        line-height: 51px;
+      }
+
+      &-content { margin-top: 20px; flex: 0 0 100%; }
+    }
+  }
+}
+
+.light .mi-contact-infoblock {
+  background: rgba(darken($light-color-bg-body, 5), 1);
+
+  &-icon { border-color: $light-color-border; }
+
+  &-content p a {
+    color: $light-color-body;
+    &:hover { color: $light-color-theme; }
+  }
+}

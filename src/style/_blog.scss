@@ -1,0 +1,67 @@
+.mi-blog {
+  background: lighten($color-bg-body, 5);
+  border: 1px solid $color-border;
+
+  &-image { position: relative; }
+
+  &-date {
+    position: absolute;
+    right: 15px;
+    bottom: -15px;
+    height: 55px;
+    width: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: rgba($color-theme, 0.8);
+    color: #ffffff;
+    font-size: 13px;
+
+    .date { font-size: 18px; font-weight: 700; line-height: 1; }
+    .month { text-transform: uppercase; }
+  }
+
+  &-content {
+    padding: 25px;
+
+    h5 a {
+      color: $color-heading;
+      transition: $transition;
+      &:hover { color: $color-theme; }
+    }
+  }
+}
+
+.notfound {
+  &-inner {
+    padding: 60px 40px;
+    background: lighten($color-bg-body, 5);
+  }
+
+  h1 {
+    font-size: 6rem;
+    color: #fd7171;
+    margin-bottom: 10px;
+  }
+
+  .mi-button { margin-top: 15px; }
+}
+
+.light {
+  .mi-blog {
+    background: darken($light-color-bg-body, 5);
+
+    &-date { background: rgba($light-color-theme, 0.8); color: #ffffff; }
+
+    &-content h5 a {
+      color: $light-color-heading;
+      &:hover { color: $light-color-theme; }
+    }
+  }
+
+  .notfound-inner {
+    background: darken($light-color-bg-body, 5);
+  }
+}

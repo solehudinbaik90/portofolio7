@@ -1,0 +1,45 @@
+.mi-testimonial-slideritem {
+  padding: 0 12px;
+}
+
+.mi-testimonial {
+  &-content {
+    position: relative;
+    padding: 30px;
+    margin-bottom: 25px;
+    border: 1px solid $color-border;
+    background: lighten($color-bg-body, 5);
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 40px;
+      bottom: -14px;
+      border-style: solid;
+      border-width: 14px 14px 0 0;
+      border-color: lighten($color-bg-body, 5) transparent transparent lighten($color-bg-body, 5);
+    }
+
+    p { margin-bottom: 0; font-style: italic; }
+  }
+
+  &-author {
+    padding-left: 10px;
+
+    h5 { margin-bottom: 0; }
+    h6 { font-weight: 400; color: $color-body; }
+  }
+}
+
+.light .mi-testimonial {
+  &-content {
+    border-color: $light-color-border;
+    background: darken($light-color-bg-body, 5);
+
+    &::after {
+      border-color: darken($light-color-bg-body, 5) transparent transparent darken($light-color-bg-body, 5);
+    }
+  }
+
+  &-author h6 { color: $light-color-body; }
+}

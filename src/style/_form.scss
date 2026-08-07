@@ -1,0 +1,27 @@
+.mi-contact-formwrapper h4 {
+  margin-bottom: 20px;
+}
+
+.mi-form-field {
+  position: relative;
+  margin-bottom: 20px;
+
+  label {
+    position: absolute;
+    left: 15px;
+    top: -10px;
+    padding: 0 6px;
+    font-size: 13px;
+    background: $color-bg-body;
+    color: $color-body;
+  }
+
+  input, textarea {
+    border-color: $color-border;
+  }
+}
+
+.light .mi-form-field {
+  label { background: $light-color-bg-body; }
+  input, textarea { border-color: $light-color-border; }
+}
