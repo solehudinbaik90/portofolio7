@@ -2,7 +2,7 @@ import axios from "axios";
 import FsLightbox from "fslightbox-react";
 import React, { Suspense, useEffect, useState } from "react";
 import * as Icon from "react-feather";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Slider from "react-slick";
 import Layout from "../components/Layout";
 import Sectiontitle from "../components/Sectiontitle";
