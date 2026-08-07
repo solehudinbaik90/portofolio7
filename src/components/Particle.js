@@ -8,44 +8,95 @@ function Particle({ lightMode }) {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => setInit(true));
+    }).then(() => {
+      setInit(true);
+    });
   }, []);
 
-  if (!init) return null;
-
-  const baseColor = lightMode ? "#000000" : "#ffffff";
-
-  const options = {
+  // DIUBAH: Menggunakan standar opsi tsParticles v3
+  const paramConfig = {
     fpsLimit: 60,
     particles: {
-      number: { value: 120, density: { enable: true, area: 800 } },
-      color: { value: baseColor },
-      opacity: { value: 0.15 },
-      size: { value: { min: 1, max: 5 } },
-      links: { enable: true, color: baseColor, distance: 140, opacity: 0.1 },
-      collisions: { enable: true },
+      number: {
+        value: 160,
+        density: {
+          enable: false,
+        },
+      },
+      color: {
+        value: "#ffffff",
+      },
+      opacity: {
+        value: 0.1,
+      },
+      size: {
+        value: { min: 1, max: 5 }, // Menggantikan random: true
+        animation: {                // Menggantikan 'anim'
+          enable: true,
+          speed: 4,
+          sync: false,
+        },
+      },
+      links: {                      // Menggantikan 'line_linked'
+        enable: false,
+      },
       move: {
         enable: true,
-        random: true,
         speed: 1,
         direction: "top",
-        outModes: { default: "out" },
+        outModes: {                 // Menggantikan 'out_mode'
+          default: "out",
+        },
       },
     },
-    interactivity: {
-      events: {
-        onHover: { enable: true, mode: "repulse" },
-        onClick: { enable: true, mode: "attract" },
-      },
-      modes: {
-        repulse: { distance: 100, duration: 0.4 },
-        attract: { distance: 150, duration: 0.4, factor: 3 },
-      },
-    },
-    detectRetina: true,
   };
 
-  return <Particles id="tsparticles" className="mi-home-particle" options={options} />;
+  const paramConfigLight = {
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: 160,
+        density: {
+          enable: false,
+        },
+      },
+      color: {
+        value: "#000000",
+      },
+      opacity: {
+        value: 0.1,
+      },
+      size: {
+        value: { min: 0.3, max: 5 }, // Menggantikan random: true
+        animation: {                  // Menggantikan 'anim'
+          enable: true,
+          speed: 4,
+          sync: false,
+        },
+      },
+      links: {                        // Menggantikan 'line_linked'
+        enable: false,
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "top",
+        outModes: {                   // Menggantikan 'out_mode'
+          default: "out",
+        },
+      },
+    },
+  };
+
+  return (
+    init && (
+      <Particles
+        id="tsparticles"
+        className="mi-home-particle"
+        options={lightMode ? paramConfigLight : paramConfig}
+      />
+    )
+  );
 }
 
 export default Particle;
