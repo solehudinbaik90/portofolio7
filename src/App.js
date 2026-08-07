@@ -1,31 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // 1. Pastikan Anda mengimpor useEffect
 import * as Icon from "react-feather";
 import "./App.scss";
-import About from "./pages/About";
-import BlogDetails from "./pages/BlogDetails";
-import Blogs from "./pages/Blogs";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import Notfound from "./pages/Notfound";
-import Portfolios from "./pages/Portfolios";
-import Resumes from "./pages/Resumes";
-import { RouterProvider } from "react-router-dom";
-import { createBrowserRouter } from "react-router-dom";
+// ... (Impor halaman lainnya tetap sama) ...
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 function App() {
-  const [lightMode, setLightMode] = useState(false); // Made it true if you want to load your site light mode primary
+  const [lightMode, setLightMode] = useState(false);
 
-  lightMode
-    ? document.body.classList.add("light")
-    : document.body.classList.remove("light");
+  // 2. Bungkus manipulasi classList di dalam useEffect
+  useEffect(() => {
+    if (lightMode) {
+      document.body.classList.add("light");
+    } else {
+      document.body.classList.remove("light");
+    }
+  }, [lightMode]); // Efek ini akan berjalan setiap kali nilai lightMode berubah
 
   const handleMode = () => {
     if (!lightMode) {
       setLightMode(true);
-      document.body.classList.add("light");
     } else {
       setLightMode(false);
-      document.body.classList.remove("light");
     }
   };
 
