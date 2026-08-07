@@ -18,7 +18,7 @@
     "@tsparticles/slim": "^3.5.0",
     "@tsparticles/engine": "^3.5.0",
     "markdown-to-jsx": "^7.4.7",
-    "react-lineicons": "^5.0.0",
+    "react-lineicons": "^2.0.1",
     "react-feather": "^2.0.10",
     "react-on-screen": "^2.1.1",
     "react-scripts": "5.0.1",
