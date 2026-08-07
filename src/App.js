@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as Icon from "react-feather";
+import * as Icon from "react-helmet-async";
 import "./App.scss";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
