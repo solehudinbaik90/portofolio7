@@ -4,6 +4,7 @@ import "./App.scss";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import { LightModeContext } from "./context/LightModeContext";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const [lightMode, setLightMode] = useState(false);
@@ -25,7 +26,9 @@ function App() {
           onClick={() => setLightMode((v) => !v)}
         />
       </div>
-      <RouterProvider router={router} />
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
     </LightModeContext.Provider>
   );
 }
