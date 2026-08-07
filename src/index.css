@@ -121,10 +121,6 @@ code {
   display: none;
 }
 
-/* fixed loader url syntax */
-.slick-loading .slick-list {
-  background: #fff url('/media/preloader.gif') 50% no-repeat;
-}
 
 /* slick icon font */
 @font-face {
