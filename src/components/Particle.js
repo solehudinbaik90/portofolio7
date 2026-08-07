@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
 function Particle({ lightMode }) {
   const [init, setInit] = useState(false);
 
+  // Inisialisasi engine hanya sekali saat komponen pertama kali dipasang
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
@@ -13,89 +14,55 @@ function Particle({ lightMode }) {
     });
   }, []);
 
-  // DIUBAH: Menggunakan standar opsi tsParticles v3
-  const paramConfig = {
-    fpsLimit: 60,
-    particles: {
-      number: {
-        value: 160,
-        density: {
-          enable: false,
+  // Membungkus konfigurasi dengan useMemo agar tsParticles tidak re-init terus menerus
+  const options = useMemo(() => {
+    const baseConfig = {
+      fpsLimit: 60,
+      particles: {
+        number: {
+          value: 160,
+          density: { enable: false },
         },
-      },
-      color: {
-        value: "#ffffff",
-      },
-      opacity: {
-        value: 0.1,
-      },
-      size: {
-        value: { min: 1, max: 5 }, // Menggantikan random: true
-        animation: {                // Menggantikan 'anim'
+        opacity: { value: 0.1 },
+        size: {
+          value: { min: 1, max: 5 },
+          animation: {
+            enable: true,
+            speed: 4,
+            sync: false,
+          },
+        },
+        links: { enable: false },
+        move: {
           enable: true,
-          speed: 4,
-          sync: false,
+          speed: 1,
+          direction: "top",
+          outModes: { default: "out" },
         },
       },
-      links: {                      // Menggantikan 'line_linked'
-        enable: false,
-      },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: "top",
-        outModes: {                 // Menggantikan 'out_mode'
-          default: "out",
-        },
-      },
-    },
-  };
+    };
 
-  const paramConfigLight = {
-    fpsLimit: 60,
-    particles: {
-      number: {
-        value: 160,
-        density: {
-          enable: false,
-        },
-      },
-      color: {
-        value: "#000000",
-      },
-      opacity: {
-        value: 0.1,
-      },
-      size: {
-        value: { min: 0.3, max: 5 }, // Menggantikan random: true
-        animation: {                  // Menggantikan 'anim'
-          enable: true,
-          speed: 4,
-          sync: false,
-        },
-      },
-      links: {                        // Menggantikan 'line_linked'
-        enable: false,
-      },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: "top",
-        outModes: {                   // Menggantikan 'out_mode'
-          default: "out",
-        },
-      },
-    },
-  };
+    // Sesuaikan warna berdasarkan lightMode
+    if (lightMode) {
+      baseConfig.particles.color = { value: "#000000" };
+      baseConfig.particles.size.value.min = 0.3;
+    } else {
+      baseConfig.particles.color = { value: "#ffffff" };
+      baseConfig.particles.size.value.min = 1;
+    }
+
+    return baseConfig;
+  }, [lightMode]);
+
+  // JANGAN render apa pun jika engine belum siap (Mencegah crash .add() pada canvas kosong)
+  if (!init) return null;
 
   return (
-    init && (
-      <Particles
-        id="tsparticles"
-        className="mi-home-particle"
-        options={lightMode ? paramConfigLight : paramConfig}
-      />
-    )
+    <Particles
+      id="tsparticles"
+      className="mi-home-particle"
+      options={options}
+    />
   );
 }
 
