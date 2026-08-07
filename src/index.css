@@ -123,7 +123,7 @@ code {
 
 /* fixed loader url syntax */
 .slick-loading .slick-list {
-  background: #fff url('/media/loader.gif') 50% no-repeat;
+  background: #fff url('/media/preloader.gif') 50% no-repeat;
 }
 
 /* slick icon font */
