@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react"; // 1. Pastikan Anda mengimpor useEffect
 import * as Icon from "react-feather";
 import "./App.scss";
-// ... (Impor halaman lainnya tetap sama) ...
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import About from "./pages/About";
+import BlogDetails from "./pages/BlogDetails";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Notfound from "./pages/Notfound";
+import Portfolios from "./pages/Portfolios";
+import Resumes from "./pages/Resumes";
+import { RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 function App() {
   const [lightMode, setLightMode] = useState(false);
