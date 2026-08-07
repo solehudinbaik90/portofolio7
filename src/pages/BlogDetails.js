@@ -1,7 +1,7 @@
 import Disqus from "disqus-react";
 import Markdown from "markdown-to-jsx";
 import React, { Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
