@@ -1,24 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-// Kita buat custom hook pengganti secara lokal tanpa perlu library luar
-function useLocalProgressiveImage(src) {
-  const [sourceLoaded, setSourceLoaded] = useState(null);
+export function Image({ src, loader, alt = "", ...props }) {
+  const [imgSrc, setImgSrc] = useState(loader || src);
 
   useEffect(() => {
     if (!src) return;
-    
+    let isMounted = true;
     const img = new window.Image();
     img.src = src;
-    img.onload = () => setSourceLoaded(src);
-  }, [src]);
+    img.onload = () => isMounted && setImgSrc(src);
+    img.onerror = () => isMounted && setImgSrc(loader);
+    return () => {
+      isMounted = false;
+    };
+  }, [src, loader]);
 
-  return sourceLoaded;
-}
-
-export function Image({ src, loader, ...props }) {
-  // Jika gambar utama selesai dimuat, variabel ini akan berisi 'src'
-  const loadedSrc = useLocalProgressiveImage(src);
-
-  // Jika belum selesai dimuat, tampilkan gambar 'loader' (placeholder)
-  return <img src={loadedSrc ? src : loader} {...props} />;
+  return <img src={imgSrc} alt={alt} {...props} />;
 }
