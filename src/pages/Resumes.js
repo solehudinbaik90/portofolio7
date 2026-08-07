@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import TrackVisibility from "react-on-screen";
 import Layout from "../components/Layout";
 import Progress from "../components/Progress";
