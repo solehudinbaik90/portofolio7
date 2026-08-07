@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
 import * as Icon from "react-feather";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async"; // Sudah dimigrasi ke async
 import Layout from "../components/Layout";
 import Sectiontitle from "../components/Sectiontitle";
 import Spinner from "../components/Spinner";
@@ -35,7 +35,7 @@ function Contact() {
       setMessage("Message is required");
     } else {
       setError(false);
-      setMessage("You message has been sent!!!");
+      setMessage("Your message has been sent!!!");
     }
   };
   const handleChange = (event) => {
@@ -60,22 +60,23 @@ function Contact() {
   };
 
   useEffect(() => {
-  let mounted = true;
-  axios.get("/api/contactinfo")
-    .then((response) => {
-      mounted && {
-        setPhoneNumbers(response.data.phoneNumbers);
-        setEmailAddress(response.data.emailAddress);
-        setAddress(response.data.address);
-      };
-    })
-    .catch((error) => {
-      console.error("Gagal memuat information:", error);
-    });
-  return () => {
-    mounted = false;
-  };
-}, []);
+    let mounted = true;
+    axios.get("/api/contactinfo")
+      .then((response) => {
+        // PERBAIKAN: Menggunakan blok percabangan if untuk mengeksekusi multi-state secara valid
+        if (mounted) {
+          setPhoneNumbers(response.data.phoneNumbers);
+          setEmailAddress(response.data.emailAddress);
+          setAddress(response.data.address);
+        }
+      })
+      .catch((error) => {
+        console.error("Gagal memuat information:", error);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <Layout>
@@ -137,7 +138,7 @@ function Contact() {
                     </div>
                     <div className="mi-form-field">
                       <label htmlFor="contact-form-message">
-                        Tulis Pesaj Anda*
+                        Tulis Pesan Anda*
                       </label>
                       <textarea
                         onChange={handleChange}
@@ -213,6 +214,3 @@ function Contact() {
 }
 
 export default Contact;
-
-
-
