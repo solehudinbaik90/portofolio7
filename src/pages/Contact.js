@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Suspense, useEffect, useState } from "react";
 import * as Icon from "react-feather";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Layout from "../components/Layout";
 import Sectiontitle from "../components/Sectiontitle";
 import Spinner from "../components/Spinner";
