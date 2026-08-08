@@ -1,65 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import "./App.scss";
-import About from "./pages/About";
-import BlogDetails from "./pages/BlogDetails";
-import Blogs from "./pages/Blogs";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import Notfound from "./pages/Notfound";
-import Portfolios from "./pages/Portfolios";
-import Resumes from "./pages/Resumes";
 import { RouterProvider } from "react-router-dom";
-import { createBrowserRouter } from "react-router-dom";
+import { router } from "./router";
+import { LightModeContext } from "./context/LightModeContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
-  const [lightMode, setLightMode] = useState(false); // Made it true if you want to load your site light mode primary
+  const [lightMode, setLightMode] = useState(false);
 
-  lightMode
-    ? document.body.classList.add("light")
-    : document.body.classList.remove("light");
-
-  const handleMode = () => {
-    if (!lightMode) {
-      setLightMode(true);
-      document.body.classList.add("light");
-    } else {
-      setLightMode(false);
-      document.body.classList.remove("light");
-    }
-  };
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home lightMode={lightMode} />,
-    },errorElement: <ErrorBoundary />,
-  },
-  { path: "/about", element: <About />, errorElement: <ErrorBoundary /> },
-  { path: "/resume", element: <Resumes />, errorElement: <ErrorBoundary /> },
-  { path: "/portfolios", element: <Portfolios />, errorElement: <ErrorBoundary /> },
-  { path: "/blogs", element: <Blogs />, errorElement: <ErrorBoundary /> },
-  { path: "/blogs/:id/:title", element: <BlogDetails />, errorElement: <ErrorBoundary /> },
-  { path: "/contact", element: <Contact />, errorElement: <ErrorBoundary /> },
-  { path: "*", element: <Notfound /> },
-]);
+  useEffect(() => {
+    document.body.classList.toggle("light", lightMode);
+  }, [lightMode]);
 
   return (
-    <>
+    <LightModeContext.Provider value={lightMode}>
       <div className="light-mode">
         <span className="icon">
           <Icon.Sun />
         </span>
         <button
-          className={
-            lightMode ? "light-mode-switch active" : "light-mode-switch"
-          }
-          onClick={() => handleMode()}
-        ></button>
+          type="button"
+          aria-label="Ganti mode terang/gelap"
+          className={lightMode ? "light-mode-switch active" : "light-mode-switch"}
+          onClick={() => setLightMode((v) => !v)}
+        />
       </div>
-      <RouterProvider router={router} />
-    </>
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </LightModeContext.Provider>
   );
 }
 
