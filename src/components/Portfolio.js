@@ -5,10 +5,12 @@ import { Image } from "./common/Image";
 
 function Portfolio(props) {
   const [toggler, setToggler] = useState(false);
-  const { title, subtitle, imageUrl, largeImageUrl, url } = props.content;
+  const [hasOpened, setHasOpened] = useState(false);
+  const { id, title, subtitle, imageUrl, largeImageUrl, url } = props.content;
 
-  const handleToggler = (value) => {
-    setToggler(value);
+  const handleToggler = () => {
+    setHasOpened(true);
+    setToggler((v) => !v);
   };
 
   return (
@@ -22,7 +24,7 @@ function Portfolio(props) {
         <ul>
           {!largeImageUrl ? null : (
             <li>
-              <button onClick={() => handleToggler(!toggler)}>
+              <button onClick={handleToggler} type="button">
                 <Icon.ZoomIn />
               </button>
             </li>
@@ -46,8 +48,8 @@ function Portfolio(props) {
         </h5>
       )}
       {subtitle ? <h6>{subtitle}</h6> : null}
-      {!largeImageUrl ? null : (
-        <FsLightbox toggler={toggler} sources={largeImageUrl} />
+      {!largeImageUrl || !hasOpened ? null : (
+        <FsLightbox key={`lightbox-${id}`} toggler={toggler} sources={largeImageUrl} />
       )}
     </div>
   );
