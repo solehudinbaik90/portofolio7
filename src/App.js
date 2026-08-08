@@ -11,6 +11,7 @@ import Portfolios from "./pages/Portfolios";
 import Resumes from "./pages/Resumes";
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const [lightMode, setLightMode] = useState(false); // Made it true if you want to load your site light mode primary
@@ -33,36 +34,16 @@ function App() {
     {
       path: "/",
       element: <Home lightMode={lightMode} />,
-    },
-    {
-      path: "/about",
-      element: <About />,
-    },
-    {
-      path: "/resume",
-      element: <Resumes />,
-    },
-    {
-      path: "/portfolios",
-      element: <Portfolios />,
-    },
-    {
-      path: "/blogs",
-      element: <Blogs />,
-    },
-    {
-      path: "/blogs/:id/:title",
-      element: <BlogDetails />,
-    },
-    {
-      path: "/contact",
-      element: <Contact />,
-    },
-    {
-      path: "*",
-      element: <Notfound />,
-    },
-  ]);
+    },errorElement: <ErrorBoundary />,
+  },
+  { path: "/about", element: <About />, errorElement: <ErrorBoundary /> },
+  { path: "/resume", element: <Resumes />, errorElement: <ErrorBoundary /> },
+  { path: "/portfolios", element: <Portfolios />, errorElement: <ErrorBoundary /> },
+  { path: "/blogs", element: <Blogs />, errorElement: <ErrorBoundary /> },
+  { path: "/blogs/:id/:title", element: <BlogDetails />, errorElement: <ErrorBoundary /> },
+  { path: "/contact", element: <Contact />, errorElement: <ErrorBoundary /> },
+  { path: "*", element: <Notfound /> },
+]);
 
   return (
     <>
