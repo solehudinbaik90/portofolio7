@@ -7,19 +7,15 @@ import Home from "./pages/Home";
 import Notfound from "./pages/Notfound";
 import Portfolios from "./pages/Portfolios";
 import Resumes from "./pages/Resumes";
-import ErrorBoundary from "./components/ErrorBoundary";
+import RouteErrorBoundary from "./components/RouteErrorBoundary";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorBoundary />,
-  },
-  { path: "/about", element: <About />, errorElement: <ErrorBoundary /> },
-  { path: "/resume", element: <Resumes />, errorElement: <ErrorBoundary /> },
-  { path: "/portfolios", element: <Portfolios />, errorElement: <ErrorBoundary /> },
-  { path: "/blogs", element: <Blogs />, errorElement: <ErrorBoundary /> },
-  { path: "/blogs/:id/:title", element: <BlogDetails />, errorElement: <ErrorBoundary /> },
-  { path: "/contact", element: <Contact />, errorElement: <ErrorBoundary /> },
+  { path: "/", element: <Home />, errorElement: <RouteErrorBoundary /> },
+  { path: "/about", element: <About />, errorElement: <RouteErrorBoundary /> },
+  { path: "/resume", element: <Resumes />, errorElement: <RouteErrorBoundary /> },
+  { path: "/portfolios", element: <Portfolios />, errorElement: <RouteErrorBoundary /> },
+  { path: "/blogs", element: <Blogs />, errorElement: <RouteErrorBoundary /> },
+  { path: "/blogs/:id/:title", element: <BlogDetails />, errorElement: <RouteErrorBoundary /> },
+  { path: "/contact", element: <Contact />, errorElement: <RouteErrorBoundary /> },
   { path: "*", element: <Notfound /> },
 ]);
