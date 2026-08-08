@@ -7,14 +7,13 @@
   background: $color-bg-dark;
   border-right: 1px solid $color-border;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   z-index: 99;
 
   &-toggler {
     display: none;
     position: fixed;
-    left: 20px;
+    right: 20px;
     top: 15px;
     height: 44px;
     width: 44px;
