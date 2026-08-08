@@ -13,6 +13,7 @@ import { Image } from "../components/common/Image";
 
 function About() {
   const [toggler, setToggler] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
   const [information, setInformation] = useState("");
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -41,6 +42,12 @@ function About() {
 
   const handleToggler = (event) => {
     setToggler(!toggler);
+  };
+  
+  
+  const handleToggler = () => {
+  setHasOpened(true);
+  setToggler((v) => !v);
   };
 
   useEffect(() => {
@@ -90,10 +97,8 @@ function About() {
                   <span className="mi-about-image-icon">
                     <Icon.ZoomIn />
                   </span>
-                  <FsLightbox
-                    toggler={toggler}
-                    sources={[information.aboutImageLg]}
-                  />
+                  {hasOpened && information.aboutImageLg && ( <FsLightbox toggler={toggler} sources={[information.aboutImageLg]} />
+                  )}
                 </div>
               </div>
               <div className="col-lg-6">
