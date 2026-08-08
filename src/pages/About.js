@@ -81,7 +81,7 @@ function About() {
       <Suspense fallback={<Spinner />}>
         <div className="mi-about-area mi-section mi-padding-top">
           <div className="container">
-            <Sectiontitle title="About Me" />
+            <Sectiontitle title="Profil Saya" />
             <div className="row align-items-center">
               <div className="col-lg-6">
                 <div className="mi-about-image">
@@ -158,7 +158,7 @@ function About() {
         </div>
         <div className="mi-service-area mi-section mi-padding-top">
           <div className="container">
-            <Sectiontitle title="Services" />
+            <Sectiontitle title="Layanan" />
             <div className="mi-service-wrapper">
               <div className="row mt-30-reverse">
                 {services.map((service) => (
@@ -175,7 +175,7 @@ function About() {
         </div>
         <div className="mi-review-area mi-section mi-padding-top mi-padding-bottom">
           <div className="container">
-            <Sectiontitle title="Reviews" />
+            <Sectiontitle title="Kata Mereka" />
             <div className="row justify-content-center">
               <div className="col-12">
                 <Slider className="mi-testimonial-slider" {...sliderSettings}>
