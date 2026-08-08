@@ -13,7 +13,6 @@ import { Image } from "../components/common/Image";
 
 function About() {
   const [toggler, setToggler] = useState(false);
-  const [hasOpened, setHasOpened] = useState(false);
   const [information, setInformation] = useState("");
   const [services, setServices] = useState([]);
   const [reviews, setReviews] = useState([]);
