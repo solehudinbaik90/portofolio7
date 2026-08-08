@@ -40,9 +40,6 @@ function About() {
     ],
   };
 
-  const handleToggler = (event) => {
-    setToggler(!toggler);
-  };
   
   
   const handleToggler = () => {
