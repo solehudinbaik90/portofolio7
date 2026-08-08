@@ -29,7 +29,7 @@ function BlogDetails(props) {
 
   const disqusShortname = "portofolio-msoleh";
   const disqusConfig = {
-    url: "https://portofolio7.vercel.app/",
+    url: "https://portofolio7-two.vercel.app/",
     identifier: blogId,
     title: blogFile,
   };
